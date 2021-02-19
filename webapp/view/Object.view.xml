@@ -1,0 +1,92 @@
+<mvc:View
+	controllerName="jblesson03.WorklistLesson3.controller.Object"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.f.semantic"
+	xmlns:footerbar="sap.ushell.ui.footerbar"
+	xmlns:layout="sap.ui.layout"
+	xmlns:core="sap.ui.core">
+
+	<semantic:SemanticPage
+		id="page"
+		headerPinnable="false"
+		toggleHeaderOnTitleClick="false"
+		busy="{objectView>/busy}"
+		busyIndicatorDelay="{objectView>/delay}">
+		<semantic:titleHeading>
+			<layout:VerticalLayout>
+				<Button 
+					tooltip="Back to main page"
+					type="Back"
+					press="onPressBack"/>
+				<Title text="MaterialID = {MaterialID}, MaterialText = {MaterialText}, IntegrationID = {IntegrationID}" />
+			</layout:VerticalLayout>
+		</semantic:titleHeading>
+	<!--	<semantic:headerContent></semantic:headerContent> -->
+		
+		<semantic:content>
+			<List headerText="Change Params of MaterialID = {MaterialID}, MaterialText = {MaterialText}, IntegrationID = {IntegrationID}">
+				<headerToolbar>
+					<Toolbar>
+						<Button text="Submit changes" enabled="{objectView>/enableChange}" type="Accept" icon="sap-icon://approvals" press="onPressSubmitChanges"/>
+						<Button text="Reset changes" enabled="{objectView>/enableChange}" type="Accept" icon="sap-icon://reset" press="onPressReset"/>
+						<Button text="Refresh" type="Accept" icon="sap-icon://refresh" press="onPressRefresh"/>
+					</Toolbar>
+				</headerToolbar>
+				<items>
+					<InputListItem label="Enable changing">
+						<Switch state="false" change="onPressSwitch"/>
+					</InputListItem>
+					<InputListItem label="MaterialText">
+						<Input id="changeMaterialText" maxLength="20" value="{MaterialText}" enabled="{objectView>/enableChange}" valueLiveUpdate="true" width="50%"/>
+					</InputListItem>
+					<InputListItem label="SubGroupText">
+						<Select id="selectSubGroupText" 
+							forceSelection="false"
+							selectedKey="{SubGroupID}"
+							enabled="{objectView>/enableChange}"
+							items="{path: '/zjblessons_base_SubGroups', sorter: { path: 'SubGroupID', descending: false } }">
+							<core:Item key="{SubGroupID}" text="{SubGroupText}"/>
+						</Select>
+					</InputListItem> 
+					<InputListItem label="GroupID">
+						<RadioButtonGroup id="radioGroup" columns="5" selectedIndex="{path: 'GroupID', formatter: '.formatter.radioButton'}">
+							<RadioButton text="1-Зимняя" enabled="{objectView>/enableChange}"/>
+							<RadioButton text="2-Летняя" enabled="{objectView>/enableChange}"/>
+							<RadioButton text="3-Всесезонная" enabled="{objectView>/enableChange}"/>
+							<RadioButton text="4-Спортивная" enabled="{objectView>/enableChange}"/>
+							<RadioButton text="5-Для дома и отдыха" enabled="{objectView>/enableChange}"/>
+						</RadioButtonGroup>
+					</InputListItem>
+					<InputListItem label="GroupText">
+						<Text text="{GroupText}"/>
+					</InputListItem>
+					<InputListItem label="IntegrationID">
+						<Input id="changeIntegrationID" maxLength="20" value="{IntegrationID}" enabled="{objectView>/enableChange}" valueLiveUpdate="true" width="30%"/>
+					</InputListItem>
+					<InputListItem label="CreatedBy">
+						<Text text="{CreatedBy}"/>
+					</InputListItem>
+					<InputListItem label="ModifiedBy">
+						<Text text="{ModifiedBy}"/>
+					</InputListItem>
+				</items>
+			</List>
+		</semantic:content>
+		
+		
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
+		</semantic:sendEmailAction>
+
+		<semantic:shareInJamAction>
+			<semantic:ShareInJamAction id="shareInJam" visible="{FLP>/isShareInJamActive}" press="onShareInJamPress"/>
+		</semantic:shareInJamAction>
+
+		<semantic:saveAsTileAction>
+			<footerbar:AddBookmarkButton id ="shareTile" title="{objectView>/saveAsTileTitle}" />
+		</semantic:saveAsTileAction>
+
+	</semantic:SemanticPage>
+
+</mvc:View>
