@@ -135,7 +135,9 @@ sap.ui.define([
 							liveChange: function(oEvent){
 								var sText = oEvent.getParameter('value');
 								var parent = oEvent.getSource().getParent();
-								parent.getBeginButton().setEnabled(sText.split(" ").join("").length > 0);
+								var sGroupID = sap.ui.getCore().byId("GroupID").getValue();
+								var sSubGroupID = sap.ui.getCore().byId("SubGroupID").getValue();
+								parent.getBeginButton().setEnabled(sText.split(" ").join("").length > 0 && sGroupID.split(" ").join("").length > 0 && sSubGroupID.split(" ").join("").length > 0);
 							}
 						}),
 						new sap.m.Label({
@@ -149,7 +151,9 @@ sap.ui.define([
 							liveChange: function(oEvent){
 								var sText = oEvent.getParameter('value');
 								var parent = oEvent.getSource().getParent();
-								parent.getBeginButton().setEnabled(sText.split(" ").join("").length > 0);
+								var sMaterialText = sap.ui.getCore().byId("MaterialText").getValue();
+								var sSubGroupID = sap.ui.getCore().byId("SubGroupID").getValue();
+								parent.getBeginButton().setEnabled(sText.split(" ").join("").length > 0 && sMaterialText.split(" ").join("").length > 0 && sSubGroupID.split(" ").join("").length > 0);
 							}
 						}),
 						new sap.m.Label({
@@ -163,7 +167,9 @@ sap.ui.define([
 							liveChange: function(oEvent){
 								var sText = oEvent.getParameter('value');
 								var parent = oEvent.getSource().getParent();
-								parent.getBeginButton().setEnabled(sText.split(" ").join("").length > 0);
+								var sGroupID = sap.ui.getCore().byId("GroupID").getValue();
+								var sMaterialText = sap.ui.getCore().byId("MaterialText").getValue();
+								parent.getBeginButton().setEnabled(sText.split(" ").join("").length > 0 && sGroupID.split(" ").join("").length > 0 && sMaterialText.split(" ").join("").length > 0);
 							}
 						})
 					],
